@@ -10,4 +10,7 @@ red = 15
 green = 13
 blue = 11
 
+gpio.setup(red, gpio.OUT)
+gpio.setup(green, gpio.OUT)
+gpio.setup(blue, gpio.OUT)
 
