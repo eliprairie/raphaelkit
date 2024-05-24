@@ -11,19 +11,16 @@ green = 13
 blue = 11
 
 # circuit 1: red switch
-#yellow = 39 # ground - replaced with link to --
 orange = 40
 # puts a pull-up resistor between in pin and out pin
 gpio.setup(orange, gpio.IN, pull_up_down=gpio.PUD_UP)
 
 # circuit 2: green switch
-# grey = 34 # ground - replaced with link to --
 purple = 33
 # puts a pull-up resistor between in pin and out pin
 gpio.setup(purple, gpio.IN, pull_up_down=gpio.PUD_UP)
 
 # circuit 3: blue switch
-#brown = 20 # ground - replaced with link to --
 white = 22
 # puts a pull-up resistor between in pin and out pin
 gpio.setup(white, gpio.IN, pull_up_down=gpio.PUD_UP)
@@ -33,44 +30,18 @@ gpio.setup(red, gpio.OUT)
 gpio.setup(green, gpio.OUT)
 gpio.setup(blue, gpio.OUT)
 
-## Turn on all 3 RGB to show white
-# gpio.output(red, on)
-# gpio.output(green, on)
-# gpio.output(blue, on)
-# time.sleep(2)
-# gpio.output(red, off)
-# gpio.output(green, off)
-# gpio.output(blue, off)
-# time.sleep(2)
-
-## Cycle through color combos once to show off and test
-# gpio.output(red, on)
-# time.sleep(1)
-# gpio.output(green, on)
-# time.sleep(1)
-# gpio.output(red, off)
-# time.sleep(1)
-# gpio.output(blue, on)
-# time.sleep(1)
-# gpio.output(green, off)
-# time.sleep(1)
-# gpio.output(red, on)
-# time.sleep(1)
-# gpio.output(blue, on)
-# time.sleep(1)
-# gpio.output(red, off)
-# time.sleep(1)
-# gpio.output(blue, off)
-
 red_button_state = 1
 red_button_state_old = 1
 red_led_on = False
+red_led_intensity = 0
 green_button_state = 1
 green_button_state_old = 1
 green_led_on = False
+green_led_intensity = 0
 blue_button_state = 1
 blue_button_state_old = 1
 blue_led_on = False
+blue_led_intensity = 0
 
 try:
     while True:
