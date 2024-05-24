@@ -6,7 +6,7 @@ gpio.setmode(gpio.BOARD)
 
 # black = ground
 black = 6
-red = 29
+red = 37
 green = 13
 blue = 11
 
@@ -30,18 +30,26 @@ gpio.setup(red, gpio.OUT)
 gpio.setup(green, gpio.OUT)
 gpio.setup(blue, gpio.OUT)
 
+# Set up PWM for pins on LED Control
+pwm_red = gpio.PWM(red, 100)
+pwm_green = gpio.PWM(green, 100)
+pwm_blue = gpio.PWM(blue, 100)
+
+duty_cycle_red = 0.99
+duty_cycle_green = 0.99
+duty_cycle_blue = 0.99
+
+pwm_red.start(int(duty_cycle_red))
+pwm_green.start(int(duty_cycle_green))
+pwm_blue.start(int(duty_cycle_blue))
+
+# Set up button states
 red_button_state = 1
 red_button_state_old = 1
-red_led_on = False
-red_led_intensity = 0
 green_button_state = 1
 green_button_state_old = 1
-green_led_on = False
-green_led_intensity = 0
 blue_button_state = 1
 blue_button_state_old = 1
-blue_led_on = False
-blue_led_intensity = 0
 
 try:
     while True:
@@ -49,14 +57,20 @@ try:
         green_button_state = gpio.input(purple)
         blue_button_state = gpio.input(white)
         if red_button_state_old == 1 and red_button_state == 0:
-            red_led_on = not red_led_on
-            gpio.output(red, red_led_on)
+            duty_cycle_red = (duty_cycle_red*1.58)
+            if duty_cycle_red > 99:
+                duty_cycle_red = 0.99
+            pwm_red.ChangeDutyCycle(int(duty_cycle_red))
         if green_button_state_old == 1 and green_button_state == 0:
-            green_led_on = not green_led_on
-            gpio.output(green, green_led_on)
+            duty_cycle_green = (duty_cycle_green*1.58)
+            if duty_cycle_green > 99:
+                duty_cycle_green = 0.99
+            pwm_green.ChangeDutyCycle(int(duty_cycle_green))
         if blue_button_state_old == 1 and blue_button_state == 0:
-            blue_led_on = not blue_led_on
-            gpio.output(blue, blue_led_on)
+            duty_cycle_blue = (duty_cycle_blue*1.58)
+            if duty_cycle_blue > 99:
+                duty_cycle_blue = 0.99
+            pwm_blue.ChangeDutyCycle(int(duty_cycle_blue))
         red_button_state_old = red_button_state
         green_button_state_old = green_button_state
         blue_button_state_old = blue_button_state
