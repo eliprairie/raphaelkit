@@ -77,4 +77,4 @@ try:
         time.sleep(.1)
 except KeyboardInterrupt:
     gpio.cleanup()
-    print('bye bye')
+    print('\nbye bye')
